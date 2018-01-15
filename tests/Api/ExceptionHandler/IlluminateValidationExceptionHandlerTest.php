@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Tests\Flarum\Api\ExceptionHandler;
+namespace Flarum\Tests\Api\ExceptionHandler;
 
 use Exception;
 use Flarum\Api\ExceptionHandler\IlluminateValidationExceptionHandler;
@@ -17,7 +17,7 @@ use Illuminate\Translation\ArrayLoader;
 use Illuminate\Translation\Translator;
 use Illuminate\Validation\Factory;
 use Illuminate\Validation\ValidationException;
-use Tests\Test\TestCase;
+use Flarum\Tests\Test\TestCase;
 
 class IlluminateValidationExceptionHandlerTest extends TestCase
 {
