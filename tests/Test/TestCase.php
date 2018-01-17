@@ -9,16 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Tests\Test;
+namespace Flarum\Tests\Test;
 
 use Mockery;
 use PHPUnit\Framework\TestCase as Test;
 
 abstract class TestCase extends Test
 {
+    use Concerns\CreatesForum, Concerns\MakesApiRequests;
+
     public function setUp()
     {
         Mockery::close();
+
+        $this->refreshApplication();
 
         $this->init();
     }
