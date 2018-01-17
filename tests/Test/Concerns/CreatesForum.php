@@ -56,6 +56,7 @@ trait CreatesForum
         $database['database'] = env('DB_DATABASE', 'flarum');
         $database['username'] = env('DB_USERNAME', 'root');
         $database['password'] = env('DB_PASSWORD', '');
+        $database['strict']   = (bool) env('DB_STRICT', false);
 
         $data->setDatabaseConfiguration($database);
         $this->configuration = $data;

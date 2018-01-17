@@ -225,7 +225,7 @@ class InstallCommand extends AbstractCommand
                 'collation' => 'utf8mb4_unicode_ci',
                 'prefix'    => $dbConfig['prefix'],
                 'port'      => $dbConfig['port'],
-                'strict'    => false
+                'strict'    => $dbConfig['strict']
             ],
             'url'   => $this->baseUrl,
             'paths' => [
@@ -239,6 +239,7 @@ class InstallCommand extends AbstractCommand
         $this->application->instance('flarum.config', $config);
         /* @var $db \Illuminate\Database\ConnectionInterface */
         $db = $this->application->make('flarum.db');
+
         $version = $db->getPdo()->getAttribute(PDO::ATTR_SERVER_VERSION);
 
         if (version_compare($version, '5.5.0', '<')) {

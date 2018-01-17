@@ -21,6 +21,7 @@ class DefaultsDataProvider implements DataProviderInterface
         'password' => '',
         'prefix'   => '',
         'port'     => '3306',
+        'strict'   => false
     ];
 
     protected $baseUrl = 'http://flarum.local';
