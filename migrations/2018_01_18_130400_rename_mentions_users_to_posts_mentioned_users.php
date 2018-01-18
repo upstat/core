@@ -11,4 +11,4 @@
 
 use Flarum\Database\Migration;
 
-return Migration::renameTable('auth_tokens', 'registration_tokens');
+return Migration::renameTable('mentions_users', 'posts_mentioned_users');
