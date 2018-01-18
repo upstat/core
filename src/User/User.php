@@ -621,7 +621,7 @@ class User extends AbstractModel
      */
     public function groups()
     {
-        return $this->belongsToMany('Flarum\Group\Group', 'users_groups');
+        return $this->belongsToMany('Flarum\Group\Group');
     }
 
     /**

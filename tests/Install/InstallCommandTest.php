@@ -16,7 +16,7 @@ class InstallCommandTest extends TestCase
      */
     public function allows_forum_installation()
     {
-        if (!file_exists($this->app->basePath() . DIRECTORY_SEPARATOR . 'config.php')) {
+        if (!file_exists(base_path('config.php'))) {
             $this->app->register(InstallServiceProvider::class);
             /** @var InstallCommand $command */
             $command = $this->app->make(InstallCommand::class);
