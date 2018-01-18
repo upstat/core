@@ -24,6 +24,8 @@ class DefaultsDataProvider implements DataProviderInterface
         'strict'   => false
     ];
 
+    protected $debug = false;
+
     protected $baseUrl = 'http://flarum.local';
 
     protected $adminUser = [
@@ -52,6 +54,16 @@ class DefaultsDataProvider implements DataProviderInterface
         'welcome_message' => 'This is beta software and you should not use it in production.',
         'welcome_title' => 'Welcome to Development Forum',
     ];
+
+    public function getDebug(): bool
+    {
+        return $this->debug;
+    }
+
+    public function setDebug(bool $debug = true)
+    {
+        $this->debug = $debug;
+    }
 
     public function getDatabaseConfiguration()
     {
