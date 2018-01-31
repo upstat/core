@@ -13,8 +13,8 @@ namespace Flarum\Tests\Settings;
 
 use Flarum\Settings\MemoryCacheSettingsRepository;
 use Flarum\Settings\SettingsRepositoryInterface;
-use Mockery as m;
 use Flarum\Tests\Test\TestCase;
+use Mockery as m;
 
 class MemoryCacheSettingsRepositoryTest extends TestCase
 {
