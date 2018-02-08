@@ -286,7 +286,7 @@ class Discussion extends AbstractModel
      */
     public function mergePost(MergeableInterface $post)
     {
-        $lastPost = $this->posts()->latest('time')->first();
+        $lastPost = $this->posts()->latest('created_at')->first();
 
         $post = $post->saveAfter($lastPost);
 

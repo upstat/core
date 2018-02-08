@@ -94,8 +94,8 @@ class CommentPost extends Post
      */
     public function hide(User $actor = null)
     {
-        if (! $this->hide_time) {
-            $this->hide_time = time();
+        if (! $this->hidden_at) {
+            $this->hidden_at = time();
             $this->hide_user_id = $actor ? $actor->id : null;
 
             $this->raise(new Hidden($this));
@@ -111,8 +111,8 @@ class CommentPost extends Post
      */
     public function restore()
     {
-        if ($this->hide_time !== null) {
-            $this->hide_time = null;
+        if ($this->hidden_at !== null) {
+            $this->hidden_at = null;
             $this->hide_user_id = null;
 
             $this->raise(new Restored($this));

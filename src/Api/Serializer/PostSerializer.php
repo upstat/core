@@ -59,9 +59,9 @@ class PostSerializer extends BasicPostSerializer
             $attributes['editTime'] = $this->formatDate($post->edit_time);
         }
 
-        if ($post->hide_time) {
+        if ($post->hidden_at) {
             $attributes['isHidden'] = true;
-            $attributes['hideTime'] = $this->formatDate($post->hide_time);
+            $attributes['hideTime'] = $this->formatDate($post->hidden_at);
         }
 
         $attributes += [
