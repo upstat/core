@@ -21,12 +21,13 @@ class ConfirmEmailHandler
     use DispatchEventsTrait;
 
     /**
-     * @var \Flarum\User\UserRepository
+     * @var UserRepository
      */
     protected $users;
 
     /**
-     * @param \Flarum\User\UserRepository $users
+     * @param Dispatcher $events
+     * @param UserRepository $users
      */
     public function __construct(Dispatcher $events, UserRepository $users)
     {
