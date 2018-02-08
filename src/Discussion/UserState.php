@@ -38,7 +38,7 @@ class UserState extends AbstractModel
     /**
      * {@inheritdoc}
      */
-    protected $table = 'users_discussions';
+    protected $table = 'discussions_users';
 
     /**
      * {@inheritdoc}
