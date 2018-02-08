@@ -43,8 +43,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  * @property bool $is_email_confirmed
  * @property string $password
  * @property string $locale
- * @property string|null $avatar_path
- * @property string $avatar_url
+ * @property string|null $avatar_url
  * @property array $preferences
  * @property \Carbon\Carbon|null $joined_at
  * @property \Carbon\Carbon|null $last_seen_at
@@ -270,7 +269,7 @@ class User extends AbstractModel
      */
     public function markAllAsRead()
     {
-        $this->read_time = time();
+        $this->marked_all_as_read_at = time();
 
         return $this;
     }
@@ -282,7 +281,7 @@ class User extends AbstractModel
      */
     public function markNotificationsAsRead()
     {
-        $this->notifications_read_time = time();
+        $this->read_notifications_at = time();
 
         return $this;
     }
@@ -295,7 +294,7 @@ class User extends AbstractModel
      */
     public function changeAvatarPath($path)
     {
-        $this->avatar_path = $path;
+        $this->attributes['avatar_url'] = $path;
 
         $this->raise(new AvatarChanged($this));
 
@@ -306,17 +305,16 @@ class User extends AbstractModel
      * Get the URL of the user's avatar.
      *
      * @todo Allow different storage locations to be used
+     * @param string|null $value
      * @return string
      */
-    public function getAvatarUrlAttribute()
+    public function getAvatarUrlAttribute(string $value = null)
     {
-        if ($this->avatar_path) {
-            if (strpos($this->avatar_path, '://') !== false) {
-                return $this->avatar_path;
-            }
-
-            return app(UrlGenerator::class)->to('forum')->path('assets/avatars/'.$this->avatar_path);
+        if ($value && strpos($value, '://') === false) {
+            return app(UrlGenerator::class)->to('forum')->path('assets/avatars/'.$value);
         }
+
+        return $value;
     }
 
     /**
@@ -365,8 +363,8 @@ class User extends AbstractModel
      */
     public function activate()
     {
-        if ($this->is_activated !== true) {
-            $this->is_activated = true;
+        if ($this->is_email_confirmed !== true) {
+            $this->is_email_confirmed = true;
 
             $this->raise(new Activated($this));
         }
@@ -470,7 +468,7 @@ class User extends AbstractModel
     public function getNewNotificationsCount()
     {
         return $this->getUnreadNotifications()->filter(function ($notification) {
-            return $notification->time > $this->notifications_read_time ?: 0;
+            return $notification->time > $this->read_notifications_at ?: 0;
         })->count();
     }
 
@@ -611,7 +609,7 @@ class User extends AbstractModel
      */
     public function read()
     {
-        return $this->belongsToMany('Flarum\Discussion\Discussion', 'users_discussions');
+        return $this->belongsToMany('Flarum\Discussion\Discussion');
     }
 
     /**
@@ -648,7 +646,7 @@ class User extends AbstractModel
         // more than a guest. If they are activated, we can give them the
         // standard 'member' group, as well as any other groups they've been
         // assigned to.
-        if ($this->is_activated) {
+        if ($this->is_email_confirmed) {
             $groupIds = array_merge($groupIds, [Group::MEMBER_ID], $this->groups->pluck('id')->all());
         }
 
