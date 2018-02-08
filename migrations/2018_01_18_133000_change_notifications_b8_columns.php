@@ -18,8 +18,22 @@ return [
             $table->dropColumn('sender_id', 'subject_type');
 
             $table->renameColumn('time', 'created_at');
-            $table->renameColumn('is_read', 'read_at');
-            $table->renameColumn('is_deleted', 'deleted_at');
+
+            $table->timestamp('read_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
+        });
+
+        $schema->getConnection()->table('notifications')
+            ->where('is_read', 1)
+            ->update(['read_at' => time()]);
+
+        $schema->getConnection()->table('notifications')
+            ->where('is_deleted', 1)
+            ->update(['deleted_at' => time()]);
+
+        $schema->table('notifications', function (Blueprint $table) {
+            $table->dropColumn('is_read');
+            $table->dropColumn('is_deleted');
         });
     },
 
@@ -29,8 +43,21 @@ return [
             $table->string('subject_type', 200)->nullable();
 
             $table->renameColumn('created_at', 'time');
-            $table->renameColumn('read_at', 'is_read');
-            $table->renameColumn('deleted_at', 'is_deleted');
+
+            $table->boolean('is_read');
+            $table->boolean('is_deleted');
+        });
+
+        $schema->getConnection()->table('notifications')
+            ->whereNotNull('read_at')
+            ->update(['is_read' => 1]);
+        $schema->getConnection()->table('notifications')
+            ->whereNotNull('deleted_at')
+            ->update(['is_deleted' => 1]);
+
+        $schema->table('notifications', function (Blueprint $table) {
+            $table->dropColumn('read_at');
+            $table->dropColumn('deleted_at');
         });
     }
 ];
