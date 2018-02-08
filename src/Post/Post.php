@@ -93,7 +93,7 @@ class Post extends AbstractModel
         // discussion.
         static::creating(function (Post $post) {
             $post->type = $post::$type;
-            $post->number = ++$post->discussion->number_index;
+            $post->number = ++$post->discussion->post_number_index;
             $post->discussion->save();
         });
 
