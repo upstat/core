@@ -40,16 +40,16 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  * @property int $id
  * @property string $username
  * @property string $email
- * @property bool $is_activated
+ * @property bool $is_email_confirmed
  * @property string $password
  * @property string $locale
  * @property string|null $avatar_path
  * @property string $avatar_url
  * @property array $preferences
- * @property \Carbon\Carbon|null $join_time
- * @property \Carbon\Carbon|null $last_seen_time
- * @property \Carbon\Carbon|null $read_time
- * @property \Carbon\Carbon|null $notifications_read_time
+ * @property \Carbon\Carbon|null $joined_at
+ * @property \Carbon\Carbon|null $last_seen_at
+ * @property \Carbon\Carbon|null $marked_all_as_read_at
+ * @property \Carbon\Carbon|null $read_notifications_at
  * @property int $discussions_count
  * @property int $comments_count
  */
@@ -67,10 +67,10 @@ class User extends AbstractModel
      * {@inheritdoc}
      */
     protected $dates = [
-        'join_time',
-        'last_seen_time',
-        'read_time',
-        'notifications_read_time'
+        'joined_at',
+        'last_seen_at',
+        'marked_all_as_read_at',
+        'read_notifications_at'
     ];
 
     /**
@@ -166,7 +166,7 @@ class User extends AbstractModel
         $user->username = $username;
         $user->email = $email;
         $user->password = $password;
-        $user->join_time = time();
+        $user->joined_at = time();
 
         $user->raise(new Registered($user));
 
@@ -569,7 +569,7 @@ class User extends AbstractModel
      */
     public function updateLastSeen()
     {
-        $this->last_seen_time = time();
+        $this->last_seen_at = time();
 
         return $this;
     }

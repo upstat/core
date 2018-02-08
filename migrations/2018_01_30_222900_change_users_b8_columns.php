@@ -22,7 +22,6 @@ return [
             $table->renameColumn('comments_count', 'comment_count');
             $table->renameColumn('read_time', 'marked_all_as_read_at');
             $table->renameColumn('notifications_read_time', 'read_notifications_at');
-            $table->renameColumn('suspend_until', 'suspended_until');
             $table->renameColumn('avatar_path', 'avatar_url');
             $table->dropColumn('bio', 'preferences');
         });
@@ -37,7 +36,6 @@ return [
             $table->renameColumn('comment_count', 'comments_count');
             $table->renameColumn('marked_all_as_read_at', 'read_time');
             $table->renameColumn('read_notifications_at', 'notifications_read_time');
-            $table->renameColumn('suspended_until', 'suspend_until');
             $table->renameColumn('avatar_url', 'avatar_path');
             $table->text('bio')->nullable();
             $table->binary('preferences')->nullable();

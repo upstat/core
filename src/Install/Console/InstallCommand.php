@@ -350,7 +350,7 @@ class InstallCommand extends AbstractCommand
             $admin['password']
         );
 
-        $user->is_activated = 1;
+        $user->is_email_confirmed = 1;
         $user->save();
 
         $user->groups()->sync([Group::ADMINISTRATOR_ID]);
