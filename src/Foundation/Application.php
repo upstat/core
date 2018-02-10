@@ -717,6 +717,8 @@ class Application extends Container implements ApplicationContract
             'filesystem.cloud'     => 'Illuminate\Contracts\Filesystem\Cloud',
             'hash'                 => 'Illuminate\Contracts\Hashing\Hasher',
             'mailer'               => ['Illuminate\Mail\Mailer', 'Illuminate\Contracts\Mail\Mailer', 'Illuminate\Contracts\Mail\MailQueue'],
+            'session'              => 'Illuminate\Session\SessionManager',
+            'session.driver'       => 'Illuminate\Contracts\Session\Session',
             'validator'            => ['Illuminate\Validation\Factory', 'Illuminate\Contracts\Validation\Factory'],
             'view'                 => ['Illuminate\View\Factory', 'Illuminate\Contracts\View\Factory'],
         ];

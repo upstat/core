@@ -13,9 +13,9 @@ namespace Flarum\Http\Middleware;
 
 use Flarum\User\Guest;
 use Flarum\User\User;
+use Illuminate\Contracts\Session\Session;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Zend\Stratigility\MiddlewareInterface;
 
 class AuthenticateWithSession implements MiddlewareInterface
@@ -36,7 +36,7 @@ class AuthenticateWithSession implements MiddlewareInterface
         return $out ? $out($request, $response) : $response;
     }
 
-    private function getActor(SessionInterface $session)
+    private function getActor(Session $session)
     {
         $actor = User::find($session->get('user_id')) ?: new Guest;
 
