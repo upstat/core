@@ -14,33 +14,6 @@
 
   <div class="FormGroup">
     <div class="FormField">
-      <label>MySQL Host</label>
-      <input name="mysqlHost" value="localhost">
-    </div>
-
-    <div class="FormField">
-      <label>MySQL Database</label>
-      <input name="mysqlDatabase">
-    </div>
-
-    <div class="FormField">
-      <label>MySQL Username</label>
-      <input name="mysqlUsername">
-    </div>
-
-    <div class="FormField">
-      <label>MySQL Password</label>
-      <input type="password" name="mysqlPassword">
-    </div>
-
-    <div class="FormField">
-      <label>Table Prefix</label>
-      <input type="text" name="tablePrefix">
-    </div>
-  </div>
-
-  <div class="FormGroup">
-    <div class="FormField">
       <label>Admin Username</label>
       <input name="adminUsername">
     </div>
