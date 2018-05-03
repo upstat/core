@@ -394,7 +394,7 @@ class InstallCommand extends AbstractCommand
 
     protected function getConfigFile()
     {
-        return $this->input->getOption('config') ?: base_path('mnt/config.php');
+        return $this->input->getOption('config') ?: base_path('configs/config.php');
     }
 
     /**
