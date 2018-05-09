@@ -129,7 +129,7 @@ class Site
 
     protected function getConfig()
     {
-        if (empty($this->config) && file_exists($file = $this->basePath.'/configs/config.php')) {
+        if (empty($this->config) && file_exists($file = $this->basePath.'/config.php')) {
             $this->config = include $file;
         }
 
